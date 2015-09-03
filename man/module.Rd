@@ -4,10 +4,10 @@
 \alias{module}
 \title{Linux Environment Modules interface}
 \usage{
-module(Arguments = "--help")
+module(Arguments)
 }
 \arguments{
-\item{Arguments}{"[ switches ] [ subcommand ] [ subcommand-args ]" See examples}
+\item{Arguments}{"[ switches ] [ subcommand ] [ subcommand-args ]" See examples.}
 }
 \value{
 Output messages will be sent to stderr
@@ -26,6 +26,8 @@ collection to supplement or replace the shared modulefiles.
 }
 \examples{
 module("avail") # shows available modules
+
+module("--help") # show available sub-commands and switches
 
 module("load samtools") # loads the module "samtools"
 system("which samtools") # check that samtools is loaded in the environment

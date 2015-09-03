@@ -10,7 +10,7 @@
 #' MANPATH, etc. modulefiles may be shared by many users on a system and users may have their own
 #' collection to supplement or replace the shared modulefiles.
 #'
-#' @param Arguments "[ switches ] [ subcommand ] [ subcommand-args ]" See examples
+#' @param Arguments "[ switches ] [ subcommand ] [ subcommand-args ]" See examples.
 #' @return Output messages will be sent to stderr
 #'
 #' @examples
