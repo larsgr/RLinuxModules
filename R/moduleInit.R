@@ -32,7 +32,7 @@ moduleInit <- function( version = '3.2.10',
     # remove commented lines and trim leading and trailing whitespace
     txt <- gsub("^\\s+|\\s+$", "", sub("#.*$","",txt))
     # paste together
-    path <- paste(txt[txt != ""],sep=":")
+    path <- paste(txt[txt != ""],collapse=":")
     Sys.setenv( MODULEPATH = path )
   }
 
