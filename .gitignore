@@ -12,3 +12,5 @@
 vignettes/*.html
 vignettes/*.pdf
 .Rproj.user
+
+tests/testthat/mock/init/
