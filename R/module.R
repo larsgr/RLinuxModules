@@ -14,6 +14,7 @@
 #' @return Output messages will be sent to stderr
 #'
 #' @examples
+#' \dontrun{
 #' module("avail") # shows available modules
 #'
 #' module("--help") # show available sub-commands and switches
@@ -27,7 +28,7 @@
 #'
 #' module("load samtools/1.0") # loads a specific version of the module "samtools"
 #' system("which samtools") # check that the correct samtools is loaded in the environment
-#'
+#' }
 #' @export
 module <- function( Arguments ){
 

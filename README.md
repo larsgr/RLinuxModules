@@ -1,3 +1,5 @@
+[![Travis build status](https://travis-ci.org/larsgr/RLinuxModules.svg?branch=master)](https://travis-ci.org/larsgr/RLinuxModules)
+
 # RLinuxModules
 R package that makes linux [environment modules](http://modules.sourceforge.net/) available from R.
 

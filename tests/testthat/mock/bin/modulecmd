@@ -1,0 +1,80 @@
+#!/bin/bash
+
+lang=$1
+command=$2
+shift
+shift
+
+case "$lang" in
+  python)
+  ;;
+  bash)
+  ;;
+  *)
+  echo "$lang needs to be python or bash" >&2
+  exit 1;
+esac
+
+default_path="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+run_bash_load ()
+{
+  local modules=$1
+  for module in $modules;
+  do
+    if [[ "x$module" == "xsamtools" ]]; then
+      echo "export PATH=\"/genome/samtools/bin:$default_path\""
+      echo "export SAMTOOLS_VERSION=\"1.7\""
+    fi
+  done
+}
+
+run_bash_unload ()
+{
+  local modules=$1
+  for module in $modules;
+  do
+    if [[ "x$module" == "xsamtools" ]]; then
+      echo "export PATH=\"$default_path\""
+      echo "unset SAMTOOLS_VERSION="
+    fi
+  done
+}
+
+run_python_load ()
+{
+  local modules=$1
+  for module in $modules;
+  do
+    if [[ "x$module" == "xsamtools" ]]; then
+      echo "os.environ['PATH'] = '/genome/samtools/bin:$default_path'"
+      echo "os.environ['SAMTOOLS_VERSION'] = '1.7'"
+    fi
+  done
+}
+
+run_python_unload ()
+{
+  local modules=$1
+  for module in $modules;
+  do
+    if [[ "x$module" == "xsamtools" ]]; then
+      echo "os.environ['PATH'] = '$default_path'"
+      echo "del os.environ['SAMTOOLS_VERSION']"
+    fi
+  done
+}
+
+case $command in
+  list)
+  ;;
+  load)
+  run_${lang}_load "$@"
+  ;;
+  unload)
+  run_${lang}_unload "$@"
+  ;;
+  *)
+  ;;
+esac
+
