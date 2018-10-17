@@ -39,5 +39,27 @@ moduleInit <- function( version = '3.2.10',
   if( is.na(Sys.getenv('LOADEDMODULES', unset = NA)) ){
     Sys.setenv( LOADEDMODULES = "" )
   }
+  # for {r, engine="bash"} in Rmarkdown/other bash subprocesses to use 'module' function
+  if( shell_is_bash() ) {
+    module_function <- bash_func_name()
+    if( is.na(Sys.getenv(module_function, unset = NA)) ) {
+      env_var <- list(f = paste("() {  eval `", file.path(modulesHome, "bin/modulecmd"), " bash ${1+\"$@\"}`; }",
+                                sep = ""))
+      names(env_var) <- module_function
+      do.call(Sys.setenv, env_var)
+    }
+  }
+}
 
+shell_is_bash <- function() {
+  basename(Sys.getenv("SHELL")) == "bash"
+}
+
+# probe the system to discover naming scheme BASH_FUNC_module%% vs BASH_FUNC_module()
+bash_func_name <- function() {
+  name_scheme <- system("__r() { : ;}; export -f __r; env | grep ^BASH_FUNC___r",
+                        intern = TRUE)
+  name_scheme <- gsub(pattern = "(BASH_FUNC___r|=.*)", replacement = "", x = name_scheme)
+  func_name   <- paste("BASH_FUNC_module", name_scheme, sep = "")
+  func_name
 }
