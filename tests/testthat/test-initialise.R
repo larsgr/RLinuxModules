@@ -20,7 +20,7 @@ test_that("initialise environment", {
     expect_equivalent(Sys.getenv("MODULEPATH", unset = NA), "/usr/local/share/modules")
 
     expect_equivalent(Sys.getenv("LOADEDMODULES", unset = NA), "")
-    skip_if_not(shell_is_bash(), message = "shell is not bash")
+    skip_if_not(shell_has_bash(), message = "shell is not bash")
     expect_false(is.na(Sys.getenv(bash_func_name(), unset = NA)))
   })
 })

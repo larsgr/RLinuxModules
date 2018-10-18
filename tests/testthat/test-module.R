@@ -27,14 +27,14 @@ test_that("module commands", {
 })
 
 test_that("module commands in system", {
-  skip_if_not(shell_is_bash(), message = "shell is not bash")
+  skip_if_not(shell_has_bash(), message = "shell is not bash")
   withr::with_envvar(empty_env,
     {
       moduleInit(modulesHome = modulesHome)
-      expect_equal(system("type -t module", intern = TRUE), "function",
+      expect_equal(system("bash -c 'type -t module'", intern = TRUE), "function",
                    label = "'module' is a function in shell")
 
-      expect_equivalent(system("module load samtools; echo $PATH", intern = TRUE),
+      expect_equivalent(system("bash -c 'module load samtools; echo $PATH'", intern = TRUE),
                         "/genome/samtools/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
                         label = "PATH variable")
     })
