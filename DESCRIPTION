@@ -2,12 +2,18 @@ Package: RLinuxModules
 Type: Package
 Title: Interface to the Linux Environment Modules
 Version: 0.3
-Date: 2015-09-03
-Author: Lars Grønvold
-Maintainer: Lars Grønvold <lagr@nmbu.no>
-Description: Makes linux Environment Modules available in R
+Date: 2018-10-18
+Authors@R:
+    person(given  = "Lars",
+           family = "Grønvold",
+           role   = c("aut", "cre"),
+           email  = "lagr@nmbu.no")
+Description:
+  Provides access to Linux Environment Modules in R. With RLinuxModules
+  installed, modules can be loaded and unloaded in Rscripts, Rmarkdown
+  documents and Rnotebooks.
 Encoding: UTF-8
-License: MIT
+License: MIT + file LICENSE
 LazyData: TRUE
 Suggests:
     testthat
