@@ -1,10 +1,11 @@
 Package: RLinuxModules
 Type: Package
 Title: Interface to the linux Environment Modules
-Version: 0.2
+Version: 0.3
 Date: 2015-09-03
 Author: Lars Grønvold
 Maintainer: Lars Grønvold <lagr@nmbu.no>
 Description: Makes linux Environment Modules available in R
 License: MIT
 LazyData: TRUE
+RoxygenNote: 6.1.0
