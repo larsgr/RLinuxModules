@@ -39,5 +39,34 @@ moduleInit <- function( version = '3.2.10',
   if( is.na(Sys.getenv('LOADEDMODULES', unset = NA)) ){
     Sys.setenv( LOADEDMODULES = "" )
   }
+  # for {r, engine="bash"} in Rmarkdown/other bash subprocesses to use 'module' function
+  if( shell_has_bash() ) {
+    module_function <- bash_func_name()
+    if( is.na(Sys.getenv(module_function, unset = NA)) ) {
+      env_var <- list(f = paste("() {  eval `", file.path(modulesHome, "bin/modulecmd"), " bash ${1+\"$@\"}`; }",
+                                sep = ""))
+      names(env_var) <- module_function
+      do.call(Sys.setenv, env_var)
+    }
+  }
+}
 
+shell_has_bash <- function() {
+  ## $SHELL is login shell bash - set by all shells
+  ## $0 is process name
+  ## $BASH is set by bash even when sh is symlinked to bash (/bin/sh rather than /bin/bash)
+  bash <-
+    system("{ which bash >/dev/null && bash -c 'basename ${SHELL:-unset}; basename $0; basename ${BASH:-unset}'; } || echo unset",
+           intern = TRUE)
+  any(bash == "bash") & any(bash == "unset") == FALSE
+}
+
+# probe the system to discover naming scheme BASH_FUNC_module%% vs BASH_FUNC_module()
+bash_func_name <- function() {
+  ## system() uses sh which is often not linked/copy of bash, but another shell e.g. dash
+  name_scheme <- system("bash -c '__r() { : ;}; export -f __r; env | grep ^BASH_FUNC___r'",
+                        intern = TRUE)
+  name_scheme <- gsub(pattern = "(BASH_FUNC___r|=.*)", replacement = "", x = name_scheme)
+  func_name   <- paste("BASH_FUNC_module", name_scheme, sep = "")
+  func_name
 }
