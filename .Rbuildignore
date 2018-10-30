@@ -1,2 +1,5 @@
+^LICENSE\.md$
+^\.travis\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^tests/testthat/mock/init/\.modulespath$
