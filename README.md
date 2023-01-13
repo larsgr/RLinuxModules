@@ -1,6 +1,8 @@
 # RLinuxModules
 R package that makes linux [environment modules](http://modules.sourceforge.net/) available from R.
 
+> Note: Lmod environment module system have support for R so this package is not needed.
+
 ## installation
 ```r
 devtools::install_github("larsgr/RLinuxModules")
