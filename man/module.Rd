@@ -25,6 +25,7 @@ MANPATH, etc. modulefiles may be shared by many users on a system and users may 
 collection to supplement or replace the shared modulefiles.
 }
 \examples{
+\dontrun{
 module("avail") # shows available modules
 
 module("--help") # show available sub-commands and switches
@@ -38,5 +39,5 @@ module("unload samtools") # unload the samtools module
 
 module("load samtools/1.0") # loads a specific version of the module "samtools"
 system("which samtools") # check that the correct samtools is loaded in the environment
-
+}
 }
